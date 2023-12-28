@@ -14,8 +14,11 @@ exports.el = {
     address1: 'input[data-qa="address"]',
     address2: 'input[data-qa="address2"]',
     country: 'select[data-qa="country"]',
-    state: '
-
+    state: 'input[data-qa="state"]',
+    city: 'input[data-qa="city"]',
+    zip_code: 'input[data-qa="zipcode"]',
+    mobile_number: 'input[data-qa="mobile_number"]',
+    create_account: 'button[data-qa="create-account"]'
 
 }
 

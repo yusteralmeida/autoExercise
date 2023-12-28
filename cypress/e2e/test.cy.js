@@ -9,7 +9,7 @@ describe('Dado que estou na página de cadastro', function () {
 
             const data = {
                 name: "Maria Silva",
-                email: "mariasilva695@gmail.com",
+                email: "mariasilva696@gmail.com",
                 title: "Mr",
                 newslette: "yes",
                 option: "yes",
@@ -21,6 +21,10 @@ describe('Dado que estou na página de cadastro', function () {
                 address1: 'Rua perdida da silva nº69',
                 address2: 'Rua Almeida da silva nº24',
                 country: 'United States',
+                state: 'Ceará',
+                city: 'Fortaleza',
+                code: '61656170',
+                number: '85989396381'
 
             }
 
@@ -73,23 +77,21 @@ describe('Dado que estou na página de cadastro', function () {
             //País
             FormPage.selectCountry(data.country)
 
-            // //Estado
-            // cy.get('input[data-qa="state"]').type('Ceará')
+            //Estado
+            FormPage.selectState(data.state)
 
-            // //Cidade
-            // cy.get('input[data-qa="city"]').type('Fortaleza')
+            //Cidade
+            FormPage.insertCity(data.city)
 
-            // //CEP
-            // cy.get('input[data-qa="zipcode"]').type('6012312')
+            //CEP
+            FormPage.insertZipCode(data.code)
 
-            // //Telefone
+            //Telefone
+            FormPage.insertNumber(data.number)
             // cy.get('input[data-qa="mobile_number"]').type('85999063943')
 
-            // //Criar conta
-            // cy.get('button[data-qa="create-account"]').click()
-
-            // //Conta criada
-            // cy.contains('b', 'Account Created').should('be.visible')
+            //Criar conta
+            // FormPage.clickCreateAccount()
 
         })
 
