@@ -1,73 +1,77 @@
+import HomePage from "../support/Home/index"
+import LoginPage from "../support/Login/indexLogin"
+import FormPage from "../support/RegistrationForm/indexForm"
 
 
-describe('Dado', function () {
-    context('Quando', function () {
-
-
-        it('Então', function () {
+describe('Dado que estou na página de cadastro', function () {
+    context('Quando preencho com dados válidos', function () {
+        it('Então deve ser possível cadastrar com sucesso', function () {
 
             const data = {
                 name: "Maria Silva",
                 email: "mariasilva695@gmail.com",
                 title: "Mr",
                 newslette: "yes",
-                option: "yes"
+                option: "yes",
+                password: 'Mortadela@2',
+                day: '4',
+                month: '3',
+                year: '1997',
+                company: 'Maria Inc.',
+                address1: 'Rua perdida da silva nº69',
+                address2: 'Rua Almeida da silva nº24',
+                country: 'United States',
+
             }
 
+            HomePage.go()
+            HomePage.login()
 
-            cy.visit('https://automationexercise.com/')
-            cy.get('div[class="features_items"]').should('be.visible')
-
-            //Clicar no botão Login
-            cy.get('a[href="/login"]').click()
-            cy.get('div[class="signup-form"]').should('be.visible')
-
-            //Inserir Nome
-            cy.get('input[data-qa="signup-name"]').type(data.name)
+            // Clicar no botão Login
+            LoginPage.insertName(data.name)
 
             //Inserir Email
-            cy.get('input[data-qa="signup-email"]').type(data.email)
+            LoginPage.enterEmail(data.email)
 
             //Botão Criar Conta
-            cy.get('button[data-qa="signup-button"]').click()
-
+            LoginPage.createAccountButton()
 
             //Senhor
-            cy.get('input[id="id_gender1"]').click()
+            FormPage.selectTitleMrs()
 
             // Senha
-            cy.get('input[data-qa="password"]').type('Mortadela@2')
+            FormPage.enterPassword(data.password)
 
             //Dia
-            cy.get('select[data-qa="days"]').select('4')
+            FormPage.selectDay(data.day)
 
             //Mês
-            cy.get('select[data-qa="months"]').select('3')
+            FormPage.selectMonth(data.month)
 
             //Ano
-            cy.get('select[data-qa="years"]').select('1997')
+            FormPage.selectYear(data.year)
 
-            if (data.newslette === 'yes') cy.get('#newsletter').click()
-            if (data.option === 'yes') cy.get('#optin').click()
+            //Selecionar opções
+            FormPage.signNewsletter(data.newslette)
+            FormPage.selectReceiveOffers(data.option)
 
-            // //Primeiro Nome
-            // cy.get('#first_name').type(data.name.split(' ')[0])
+            //Primeiro Nome
+            FormPage.enterFirstName(data.name)
 
-            // const segundaPalavra = data.name.split(' ').length > 1 ? data.name.split(' ')[1] : null;
             // //Sobrenome
-            // cy.get('#last_name').type(segundaPalavra)
+            FormPage.enterLastName(data.name)
 
-            // //Empresa
-            // cy.get('input[data-qa="company"]').type('Maria Inc.')
+            //Empresa
+            FormPage.insertCompany(data.company)
 
-            // //Endereço
-            // cy.get('input[data-qa="address"]').type('Rua perdida da silva nº69')
+            //Endereço
+            FormPage.enterAddress1(data.address1)
 
-            // //Endereço 2
-            // cy.get('input[data-qa="address2"]').type('Rua Almeida da silva nº24')
+            //Endereço 2
+            FormPage.enterAddress2(data.address2)
 
-            // //País
-            // cy.get('select[data-qa="country"]').select('United States')
+            //País
+            FormPage.selectCountry(data.country)
 
             // //Estado
             // cy.get('input[data-qa="state"]').type('Ceará')
