@@ -18,7 +18,8 @@ exports.el = {
     city: 'input[data-qa="city"]',
     zip_code: 'input[data-qa="zipcode"]',
     mobile_number: 'input[data-qa="mobile_number"]',
-    create_account: 'button[data-qa="create-account"]'
+    create_account: 'button[data-qa="create-account"]',
+    sucessfuMessage: 'h2[data-qa="account-created"]'
 
 }
 

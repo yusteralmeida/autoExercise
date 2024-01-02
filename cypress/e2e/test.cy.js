@@ -5,28 +5,21 @@ import FormPage from "../support/RegistrationForm/indexForm"
 
 describe('Dado que estou na página de cadastro', function () {
     context('Quando preencho com dados válidos', function () {
+
+
+        beforeEach(() => {
+            cy.fixture('data').then(function (user) {
+                this.data = user
+            })
+        });
+
+
         it('Então deve ser possível cadastrar com sucesso', function () {
 
-            const data = {
-                name: "Maria Silva",
-                email: "mariasilva696@gmail.com",
-                title: "Mr",
-                newslette: "yes",
-                option: "yes",
-                password: 'Mortadela@2',
-                day: '4',
-                month: '3',
-                year: '1997',
-                company: 'Maria Inc.',
-                address1: 'Rua perdida da silva nº69',
-                address2: 'Rua Almeida da silva nº24',
-                country: 'United States',
-                state: 'Ceará',
-                city: 'Fortaleza',
-                code: '61656170',
-                number: '85989396381'
 
-            }
+            const data = this.data
+
+            cy.apiDelete(data)
 
             HomePage.go()
             HomePage.login()
@@ -62,7 +55,7 @@ describe('Dado que estou na página de cadastro', function () {
             //Primeiro Nome
             FormPage.enterFirstName(data.name)
 
-            // //Sobrenome
+            //Sobrenome
             FormPage.enterLastName(data.name)
 
             //Empresa
@@ -88,10 +81,11 @@ describe('Dado que estou na página de cadastro', function () {
 
             //Telefone
             FormPage.insertNumber(data.number)
-            // cy.get('input[data-qa="mobile_number"]').type('85999063943')
 
-            //Criar conta
-            // FormPage.clickCreateAccount()
+            // Criar conta
+            FormPage.clickCreateAccount()
+
+            FormPage.successfulTxtShouldBe('Account Created!')
 
         })
 

@@ -66,22 +66,26 @@ const Form = {
     selectState: function (state) {
         cy.get(el.state).type(state)
     },
-    
+
     insertCity: function (city) {
         cy.get(el.city).type(city)
     },
-   
+
     insertZipCode: function (code) {
         cy.get(el.zip_code).type(code)
     },
-   
+
     insertNumber: function (number) {
         cy.get(el.mobile_number).type(number)
     },
-   
+
     clickCreateAccount: function () {
         cy.get(el.create_account).click()
     },
+
+    successfulTxtShouldBe: function (txt) {
+        cy.get(el.sucessfuMessage).should('have.text', txt)
+    }
 }
 
 export default Form
