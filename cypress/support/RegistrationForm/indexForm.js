@@ -2,6 +2,10 @@ import { el } from "./elementsForm"
 
 const Form = {
 
+    fillForm:{
+
+    },
+
     selectTitleMr: function () {
         cy.get(el.titleMr).click()
     },

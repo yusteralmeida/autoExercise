@@ -15,18 +15,13 @@ describe('Dado que estou na página de cadastro', function () {
 
         it('Então deve ser possível cadastrar com sucesso', function () {
 
-            const data = this.data
+            const data = this.data.registerUser
 
             cy.apiDelete(data)
+            cy.visit('/login')
 
-            HomePage.go()
-            HomePage.login()
-
-            //Clicar no botão Login
-            LoginPage.insertName(data.name)
-
-            //Inserir Email
-            LoginPage.enterEmail(data.email)
+            //inserir nome e email
+            LoginPage.fillSignupForm(data)
 
             //Botão Criar Conta
             LoginPage.createAccountButton()
@@ -38,13 +33,13 @@ describe('Dado que estou na página de cadastro', function () {
             FormPage.enterPassword(data.password)
 
             //Dia
-            FormPage.selectDay(data.day)
+            FormPage.selectDay(data.birthday.day)
 
             //Mês
-            FormPage.selectMonth(data.month)
+            FormPage.selectMonth(data.birthday.month)
 
             //Ano
-            FormPage.selectYear(data.year)
+            FormPage.selectYear(data.birthday.year)
 
             //Selecionar opções
             FormPage.signNewsletter(data.newslette)
@@ -90,79 +85,26 @@ describe('Dado que estou na página de cadastro', function () {
 
     })
 
-    context('Quando preencho com um user já cadastrado', function () {
-        it('Então deve me retornar "Email Address already exist!"', function () {
-            const data = this.data
+    context.only('Quando preencho com um user já cadastrado', function () {
 
+        const message = 'Email Address already exist!'
+        it('Então deve me retornar: ' + message, function () {
+
+            const data = this.data.duplicatedUser
 
             cy.apiDelete(data)
+            cy.apiSignup(data)
 
-            HomePage.go()
-            HomePage.login()
+            cy.visit('/login')
 
-            //Clicar no botão Login
-            LoginPage.insertName(data.name)
-
-            //Inserir Email
-            LoginPage.enterEmail(data.email)
-
+            //inserir nome e email
+            LoginPage.fillSignupForm(data)
+            
             //Botão Criar Conta
             LoginPage.createAccountButton()
-
-            //Senhor
-            FormPage.selectTitleMrs()
-
-            //Senha
-            FormPage.enterPassword(data.password)
-
-            //Dia
-            FormPage.selectDay(data.day)
-
-            //Mês
-            FormPage.selectMonth(data.month)
-
-            //Ano
-            FormPage.selectYear(data.year)
-
-            //Selecionar opções
-            FormPage.signNewsletter(data.newslette)
-            FormPage.selectReceiveOffers(data.option)
-
-            //Primeiro Nome
-            FormPage.enterFirstName(data.name)
-
-            //Sobrenome
-            FormPage.enterLastName(data.name)
-
-            //Empresa
-            FormPage.insertCompany(data.company)
-
-            //Endereço
-            FormPage.enterAddress1(data.address1)
-
-            //Endereço 2
-            FormPage.enterAddress2(data.address2)
-
-            //País
-            FormPage.selectCountry(data.country)
-
-            //Estado
-            FormPage.selectState(data.state)
-
-            //Cidade
-            FormPage.insertCity(data.city)
-
-            //CEP
-            FormPage.insertZipCode(data.code)
-
-            //Telefone
-            FormPage.insertNumber(data.number)
-
-            //Criar conta
-            FormPage.clickCreateAccount()
-
-            //Verificar mensagem de sucesso
-            FormPage.successfulTxtShouldBe('Account Created!')
+            
+            //Verificar mensagem
+            LoginPage.errorMessageShouldBe(message)
 
         });
     });

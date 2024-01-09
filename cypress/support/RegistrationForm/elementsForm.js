@@ -3,7 +3,7 @@ exports.el = {
     titleMr: 'input[id="id_gender1"]',
     titleMrs: 'input[id="id_gender2"]',
     password: 'input[data-qa="password"]',
-    day: 'select[data-qa="days"]',
+    day: '#days',
     month: 'select[data-qa="months"]',
     year: 'select[data-qa="years"]',
     newsletter: '#newsletter',
